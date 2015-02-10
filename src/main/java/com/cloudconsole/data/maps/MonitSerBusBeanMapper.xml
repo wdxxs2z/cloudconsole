@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloudconsole.monit.dao.MonitSerBusDao">
+
+	<select id="getServiceByIdAndType" resultType="MonitSerBusBean">
+		select * from services 
+		<where>
+			<if test="monitId!=null and monitId!='' ">
+				and monitId=#{monitId} 
+			</if>
+			<if test="service_type!=null">
+				and service_type=#{service_type}
+			</if>
+		</where>
+	</select>
+	
+	<select id="getServiceByNameAndType" resultType="MonitSerBusBean">
+		select * from services 
+		<where>
+			<if test="monitor_host!=null and monitor_host!='' ">
+				and monitor_host=#{monitor_host} 
+			</if>
+			<if test="service_type!=null">
+				and service_type=#{service_type} 
+			</if>
+		</where>
+	</select>
+
+</mapper>

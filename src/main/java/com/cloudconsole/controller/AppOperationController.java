@@ -1,6 +1,8 @@
 package com.cloudconsole.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +13,9 @@ import org.cloudfoundry.client.lib.CloudFoundryException;
 import org.cloudfoundry.client.lib.domain.CloudApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class AppOperationController {
@@ -69,6 +73,54 @@ public class AppOperationController {
 		}
 		response.getWriter().write("{success: "+success+", msg: \""+errMsg+"\"}");
 		return null;
+	}
+	
+	@RequestMapping(value="unbindAppUrl")
+	public ModelAndView unbindAppUrl (HttpServletRequest request,HttpServletResponse response) {
+		String appName = request.getParameter("name");
+		String appUri = request.getParameter("uri");
+		CloudFoundryClient client = (CloudFoundryClient) request.getSession().getAttribute("client");
+		if (client != null && StringUtils.isNotBlank(appUri)) {
+			List<String> uris = client.getApplication(appName).getUris();
+			if (uris.contains(appUri)) {
+				uris.remove(appUri);
+				client.updateApplicationUris(appName, uris);
+			}			
+		}
+		return new ModelAndView(new RedirectView("appView?name=" + appName));
+	}
+	
+	@RequestMapping(value="bindAppUrl",method=RequestMethod.POST)
+	public ModelAndView bindAppUrl (HttpServletRequest request,HttpServletResponse response) {
+		String appName = request.getParameter("name");
+		String[] uris = request.getParameterValues("uris");
+		CloudFoundryClient client = (CloudFoundryClient) request.getSession().getAttribute("client");
+		if (client != null && StringUtils.isNotBlank(appName)) {
+			List<String> uriList = new ArrayList<String>();
+			for (String uri : uris) {
+				uriList.add(uri);
+			}
+			List<String> oldUris = client.getApplication(appName).getUris();
+			uriList.addAll(oldUris);
+			client.updateApplicationUris(appName, uriList);
+		}				
+		return new ModelAndView(new RedirectView("appView?name=" + appName));
+	}
+	
+	@RequestMapping(value="addAppUrl",method=RequestMethod.POST)
+	public ModelAndView addAppUrl (HttpServletRequest request,HttpServletResponse response) {
+		String appName = request.getParameter("name");
+		String host = request.getParameter("host");
+		String subdomain = request.getParameter("subdomain");
+		CloudFoundryClient client = (CloudFoundryClient) request.getSession().getAttribute("client");
+		if (client != null && StringUtils.isNotBlank(appName) && StringUtils.isNotBlank(host) && StringUtils.isNotBlank(subdomain)) {
+			List<String> uris = new ArrayList<String>();
+			uris.add(host + "." +subdomain);
+			List<String> oldUris = client.getApplication(appName).getUris();
+			uris.addAll(oldUris);
+			client.updateApplicationUris(appName, uris);
+		}				
+		return new ModelAndView(new RedirectView("appView?name=" + appName));
 	}
 
 }

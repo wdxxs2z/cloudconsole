@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloudconsole.monit.dao.MonitHostDao">
+
+	<select id="getMonitHosts" resultType="MonitHost">
+		select * from monit
+	</select>
+	
+	<select id="getMonitHostByHostName" resultType="MonitHost" parameterType="String">
+		select * from monit 
+		where 
+		monitHostName=#{monitHostName}
+	</select>
+	
+	<select id="getMonitHostByMonitId" resultType="MonitHost" parameterType="String">
+		select * from monit 
+		where 
+		monitId=#{monitId}
+	</select>
+
+</mapper>

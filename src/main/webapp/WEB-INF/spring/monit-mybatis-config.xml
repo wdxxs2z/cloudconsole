@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+        <!-- 命名空间 -->
+    <typeAliases>
+         <typeAlias alias="MonitHost" type="com.cloudconsole.model.MonitHost"/>
+         <typeAlias alias="MonitEvent" type="com.cloudconsole.model.MonitEvent"/> 
+         <typeAlias alias="MonitProcess" type="com.cloudconsole.model.MonitProcess"/>
+         <typeAlias alias="MonitSerBusBean" type="com.cloudconsole.model.MonitSerBusBean"/> 
+         <typeAlias alias="SystemBean" type="com.cloudconsole.model.SystemBean"/> 
+    </typeAliases>
+ 
+    <!-- 映射map -->
+    <mappers>
+    	<mapper resource="com/cloudconsole/data/maps/MonitHostMapper.xml"/>
+    	<mapper resource="com/cloudconsole/data/maps/MonitEventMapper.xml"/>
+    	<mapper resource="com/cloudconsole/data/maps/MonitProcessMapper.xml"/>
+    	<mapper resource="com/cloudconsole/data/maps/MonitSerBusBeanMapper.xml"/>
+    	<mapper resource="com/cloudconsole/data/maps/SystemBeanMapper.xml"/>
+    </mappers>
+</configuration>

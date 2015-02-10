@@ -22,21 +22,39 @@
 	    <dependency>
 			<groupId>org.cloudfoundry</groupId>
 			<artifactId>cloudfoundry-client-lib</artifactId>
-			<version>1.0.4</version>
+			<version>1.0.5</version>
 			<exclusions>  
            		<exclusion>      
                 	<groupId>org.apache.tomcat.embed</groupId>          
                 	<artifactId>tomcat-embed-core</artifactId>  
-          		</exclusion>  
-     		</exclusions> 
+          		</exclusion>
+          		 <!--  
+          		<exclusion>      
+                	<groupId>org.apache.tomcat.embed</groupId>          
+                	<artifactId>tomcat-embed-websocket</artifactId>  
+          		</exclusion> 
+          		--> 
+     		</exclusions>     		
 		</dependency>
-		
-		
+			
+		<!-- gnatsd -->
+		<dependency>
+    		<groupId>com.github.tyagihas</groupId>
+    		<artifactId>java_nats</artifactId>
+    		<version>0.5.1</version>
+		</dependency>	
+			
 		<!-- docker -->
 		<dependency>
 			<groupId>com.github.docker-java</groupId>
 			<artifactId>docker-java</artifactId>
-			<version>0.10.0</version>
+			<version>0.10.2</version>
+		</dependency>
+		
+		<dependency>
+  			<groupId>com.github.mohitsoni</groupId>
+  			<artifactId>marathon-client</artifactId>
+  			<version>0.4.1</version>
 		</dependency>
 		
 		<!-- etcd -->
@@ -45,6 +63,23 @@
 			<artifactId>etcd-client</artifactId>
 			<version>0.1.2</version>
 		</dependency>
+		
+		<!-- mybatis begin -->  
+        <dependency>  
+            <groupId>org.mybatis</groupId>  
+            <artifactId>mybatis</artifactId>  
+            <version>3.2.8</version>  
+            <type>jar</type>  
+            <scope>compile</scope>  
+        </dependency>  
+        <dependency>  
+            <groupId>org.mybatis</groupId>  
+            <artifactId>mybatis-spring</artifactId>  
+            <version>1.2.2</version>  
+            <type>jar</type>  
+            <scope>compile</scope>  
+        </dependency>  
+        <!-- mybatis end -->
 		
 		<!-- db -->
 		<dependency>
@@ -56,15 +91,20 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.0.7</version>
+			<version>5.1.29</version>
 		</dependency>
 		
 		<dependency>
-			<groupId>c3p0</groupId>
+			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
-			<version>0.9.1.2</version>
+			<version>0.9.5-pre10</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
 		<!-- Apache common -->
 		<!-- 
 		<dependency>
@@ -79,6 +119,11 @@
 			<version>4.4-alpha1</version>
 		</dependency>
 		-->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.6</version>
+		</dependency>		
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
@@ -116,6 +161,11 @@
     		<artifactId>commons-io</artifactId>
     		<version>2.4</version>
 		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20141113</version>
+		</dependency>
 		
 		<!-- Spring -->
 		<dependency>
@@ -145,6 +195,46 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		<dependency>  
+            <groupId>org.springframework</groupId>  
+            <artifactId>spring-tx</artifactId>  
+            <version>${org.springframework-version}</version>  
+        </dependency>
+        <dependency>  
+            <groupId>org.springframework</groupId>  
+            <artifactId>spring-beans</artifactId>  
+            <version>${org.springframework-version}</version>  
+        </dependency>
+        <dependency>  
+            <groupId>org.springframework</groupId>  
+            <artifactId>spring-context</artifactId>  
+            <version>${org.springframework-version}</version>  
+        </dependency>
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-oxm</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+        <dependency>  
+       		<groupId> org.aspectj</groupId >  
+       		<artifactId>aspectjweaver</artifactId >  
+       		<version>1.7.0</version>  
+		</dependency> 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-crypto</artifactId>
@@ -268,8 +358,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>

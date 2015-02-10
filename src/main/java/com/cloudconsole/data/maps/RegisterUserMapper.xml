@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloudconsole.register.dao.RegisterUserDao">
+
+	<insert id="insertRegisterUser" parameterType="RegisterUser"
+		keyProperty="id">
+		insert into register_user(
+		id,
+		registerUserName,
+		registerEmail,
+		registerPassword,
+		registerFamilyName,
+		registerGivenName,
+		registerPhoneNumber,
+		isRegisted) 
+		values 
+		(
+		#{id},
+		#{registerUserName},
+		#{registerEmail},
+		#{registerPassword},
+		#{registerFamilyName},
+		#{registerGivenName},
+		#{registerPhoneNumber},
+		#{isRegisted})
+	</insert>
+	
+	<update id="updateRegisterUser" parameterType="RegisterUser"
+	keyProperty="id">
+		update register_user 
+		set 
+		registerUserName=#{registerUserName},
+		registerEmail=#{registerEmail},
+		registerPassword=#{registerFamilyName},
+		registerGivenName=#{registerGivenName},
+		registerPhoneNumber=#{registerPhoneNumber},
+		isRegisted=#{isRegisted} 
+		where 
+		id=#{id}
+	</update>
+	
+	<delete id="deleteRegisterUser" parameterType="String">
+		delete 
+		from register_user 
+		where registerUserName=#{registerUserName}
+	</delete>
+	
+	<select id="getRegisterUsers" resultType="RegisterUser">
+		select * 
+		from register_user 		
+	</select>
+	
+	<select id="getRegisterUserByUserName" resultType="RegisterUser" parameterType="String">
+		select * 
+		from register_user 
+		where 
+		registerUserName=#{registerUserName}		
+	</select>
+	
+	<select id="getRegisterUserStateByUserName" resultType="Boolean" parameterType="String">
+		select isRegisted 
+		from register_user 
+		where 
+		registerUserName=#{registerUserName}
+	</select>
+	
+	<select id="getRegisterUsersByStat" resultType="RegisterUser" parameterType="Boolean">
+		select * 
+		from register_user 
+		where 
+		isRegisted=#{isRegister}
+	</select>
+	
+</mapper>
