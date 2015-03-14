@@ -43,6 +43,12 @@
     		<artifactId>java_nats</artifactId>
     		<version>0.5.1</version>
 		</dependency>	
+		
+		<dependency>
+    		<groupId>com.github.cloudfoundry-community</groupId>
+    		<artifactId>nats-client-spring</artifactId>
+    		<version>0.5.1</version>
+		</dependency>
 			
 		<!-- docker -->
 		<dependency>

@@ -3,9 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc  
+        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -13,6 +16,8 @@
 	<annotation-driven />
 	
 	<context:component-scan base-package="com.cloudconsole" />
+	
+	<beans:bean id="sessionValidate" class="com.cloudconsole.handler.SessionValidate"></beans:bean>
 	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="5000000000" />
@@ -30,6 +35,20 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+	
+	<mvc:interceptors>
+    	<mvc:interceptor>
+    		<mvc:mapping path="/*"/>
+    		<beans:bean class="com.cloudconsole.handler.SessionValidate">
+    			<beans:property name="excludeUrls">
+    				<beans:list>
+    					<beans:value>/login</beans:value>
+    					<beans:value>/register</beans:value>
+    				</beans:list>
+    			</beans:property>
+    		</beans:bean>
+    	</mvc:interceptor>
+    </mvc:interceptors>
     
     <beans:bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
     	<beans:property name="exceptionMappings">

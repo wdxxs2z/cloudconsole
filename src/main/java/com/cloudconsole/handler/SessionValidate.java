@@ -1,5 +1,7 @@
 package com.cloudconsole.handler;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,14 +16,27 @@ import com.cloudconsole.controller.LoginController;
  * 2014.09.17
  * */
 public class SessionValidate implements HandlerInterceptor{
+	
+	private List<String> excludeUrls;
+
+	public void setExcludeUrls(List<String> excludeUrls) {
+		this.excludeUrls = excludeUrls;
+	}
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
+		
+		String requestUri = request.getRequestURI();
+		for (String uri : excludeUrls) {
+			if (requestUri.endsWith(uri)) {
+				return true;
+			}
+		}
+		
 		Object client = request.getSession().getAttribute("client");
 		if(client == null && !(handler instanceof LoginController) && !(handler instanceof AuthenticatorController)){
-			//重定向
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect("login");
 			return false;
 		}
 		return true;
