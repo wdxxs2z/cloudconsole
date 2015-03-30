@@ -44,6 +44,8 @@
     				<beans:list>
     					<beans:value>/login</beans:value>
     					<beans:value>/register</beans:value>
+    					<beans:value>/authenticator</beans:value>
+    					<beans:value>/register_post</beans:value>
     				</beans:list>
     			</beans:property>
     		</beans:bean>
