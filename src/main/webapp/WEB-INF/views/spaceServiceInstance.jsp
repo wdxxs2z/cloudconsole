@@ -213,15 +213,15 @@
                               	</thead>
                               	<tbody>
                               	<%
-                              		List<CloudService> serviceInstances = client.getServicesFromSpace(space.getMeta().getGuid().toString());
-                              		for (CloudService serviceInstance : serviceInstances) {
+                              		List<CloudService> services = client.getServicesFromSpace(space.getMeta().getGuid().toString());
+                              		for (CloudService service : services) {
                               	%>
                               		<tr>
-                              			<td><%=serviceInstance.getName() %></td>
-                        				<td><%=serviceInstance.getPlan() %></td>
-                        				<td><%=serviceInstance.getLabel() %></td>
-                        				<td><%=serviceInstance.getVersion() %></td>
-                        				<td><%=serviceInstance.getMeta().getCreated() %></td>
+                              			<td><%=service.getName() %></td>
+                        				<td><%=service.getPlan() %></td>
+                        				<td><%=service.getLabel() %></td>
+                        				<td><%=service.getVersion() %></td>
+                        				<td><%=service.getMeta().getCreated() %></td>
                               		</tr>
                               	<%
                               		}
