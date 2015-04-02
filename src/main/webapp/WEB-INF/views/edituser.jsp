@@ -223,7 +223,7 @@
                                            		<label class="control-label" for="inputSelectMultiGroup">添加或移除组织部门:</label>
                                            		<div class="controls">
                                            			<select id="inputSelectMultiGroup" data-form="select2" id="orgspace" name="orgspace"
-                                           			style="width:200px" data-placeholder="我需要合适的部门" multiple="multiple">
+                                           			style="width:220px" data-placeholder="我需要合适的部门" multiple="multiple">
                                            			<%
                                            				List<CloudOrganization> orgs = client.getOrganizations();
                                            				String orgName = "";
@@ -270,7 +270,7 @@
                                            		</div>
                                            	</div>
                                            	<div class="form-actions">
-                                            	<button type="submit" class="btn btn-primary">Save changes</button>
+                                            	<button type="submit" class="btn btn-primary">保存修改</button>
                                             </div>
                                      	</form>
                                      </div>

@@ -312,7 +312,7 @@
 															<%
 																for(CloudUser register: notRegister){
 															%>
-															<option><%=register.getName() %></option>
+															<option value=<%=register.getMeta().getGuid().toString() %>><%=register.getName() %></option>
 															<%
 																}
 															%>
@@ -335,7 +335,7 @@
 																<%
 																	for(CloudSpace space: client.getSpaceFromOrgName(orgName)){
 																%>
-                                                            	<option><%=orgName%>  -- <%=space.getName()%></option>
+                                                            	<option value=<%=space.getMeta().getGuid().toString()%>><%=space.getName()%></option>
                                                             	<%
 																	}
                                                             	%>

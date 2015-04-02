@@ -51,7 +51,7 @@
     		</beans:bean>
     	</mvc:interceptor>
     </mvc:interceptors>
-    
+<!-- 
     <beans:bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
     	<beans:property name="exceptionMappings">
     		<beans:props>
@@ -62,5 +62,5 @@
     		</beans:props>
     	</beans:property>
     </beans:bean>
-	
+ -->	
 </beans:beans>

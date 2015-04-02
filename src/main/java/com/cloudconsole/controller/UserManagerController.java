@@ -55,25 +55,18 @@ public class UserManagerController {
 			@RequestParam(value = "teamSelect", required = false) String teamSelect,
 			HttpServletRequest request, HttpServletResponse response) {
 
-		String[] users = request.getParameterValues("multiUser");
+		String[] usersGuid = request.getParameterValues("multiUser");
 		orgValue = request.getParameter("orgValue");
-		String team = request.getParameter("teamSelect");
-		String[] split = team.split("--");
-		String spaceName = split[1].trim();
+		String spaceGuid = request.getParameter("teamSelect");
 
 		CloudFoundryClient client = (CloudFoundryClient) request.getSession()
 				.getAttribute("client");
 
-		for (String user : users) {
-			client.associateOrgWithUser(client.findUserByUsername(user), client.getOrgByName(orgValue, true));
-
-			List<CloudSpace> spaces = client.getSpaceFromOrgName(orgValue);
-			for (CloudSpace space : spaces) {
-				if (space.getName().equals(spaceName)) {
-					client.associataSpaceWithUser(client.findUserByUsername(user), space);
-				}
-			}
-			client.updateGroupMember(user, "scim.read", "members", false);
+		for (String userGuid : usersGuid) {
+			CloudOrganization organization = client.getOrgByName(orgValue, true);
+			client.associateOrgWithUser(userGuid, organization.getMeta().getGuid().toString());
+			client.associataSpaceWithUser(userGuid, spaceGuid);
+			client.updateGroupMemberByUserGuid(userGuid, "scim.read", "members", false);
 		}
 
 		return new ModelAndView("usermanager");
