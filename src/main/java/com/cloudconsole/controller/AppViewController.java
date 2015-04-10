@@ -86,8 +86,6 @@ public class AppViewController {
 		if (client != null && StringUtils.isNotBlank(spaceName) && StringUtils.isNotBlank(orgName)) {			
 			try {
 				client = new CloudFoundryClient(credentials, cloudUrl, orgName, spaceName, null, true);
-				client.login();
-				request.getSession().setAttribute("cloudCredentialsUse", credentials);
 				request.getSession().setAttribute("client", client);
 			} catch (Exception e) {
 				errMessage = e.getMessage();

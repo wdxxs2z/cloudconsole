@@ -62,8 +62,7 @@
 				subdomain:subdomain,
 				disk:disk,
 				memory:memory,
-				instanceNum:instanceNum,
-				filename:filename
+				instanceNum:instanceNum
 			},
 			complete : function(data, textStatus, jqXHR){
 				if("error" == textStatus){
@@ -396,9 +395,7 @@
 													<div class="control-group">
 														<label class="control-label" for="filename">请打包文件：</label>
 														<div class="controls">
-															<input type="hidden" id="filename" name="filename"
-																value=""> <input type="file" data-form="uniform"
-																name="file" id="file" onchange="f()" />
+															<input type="file" data-form="uniform" name="file" id="file"/>
 														</div>
 													</div>
 
@@ -473,10 +470,14 @@
 
 	<!-- javascript
         ================================================== -->
-	<script type="text/javascript" src='/cloudconsole/js/widgets.js'></script>
-	<script type="text/javascript" src='/cloudconsole/js/jquery.js'></script>
-	<script type="text/javascript" src='/cloudconsole/js/jquery-ui.min.js'></script>
-	<script type="text/javascript" src='/cloudconsole/js/bootstrap.js'></script>
+	<script type="text/javascript" 
+		src='/cloudconsole/js/widgets.js'></script>
+	<script type="text/javascript" 
+		src='/cloudconsole/js/jquery.js'></script>
+	<script type="text/javascript" 
+		src='/cloudconsole/js/jquery-ui.min.js'></script>
+	<script type="text/javascript" 
+		src='/cloudconsole/js/bootstrap.js'></script>
 	<script type="text/javascript"
 		src='/cloudconsole/js/datepicker/bootstrap-datepicker.js'></script>
 	<script type="text/javascript"
@@ -550,9 +551,6 @@
 		var fn = $("#file").val();
 		var nf = fn.substr(fn.lastIndexOf("\\")+1,fn.length-fn.lastIndexOf("\\")-5);
 		return nf;
-	}		
-	function f(){
-		document.getElementById("filename").value=getFileName();
 	}
 	</script>
 

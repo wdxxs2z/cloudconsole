@@ -35,6 +35,7 @@ public class AppDeploymentController {
 	
 	@RequestMapping(value="/appUpload",method=RequestMethod.POST)
 	public ModelAndView appUpload(
+			
 			@RequestParam(value="appname",required=false) String appname,
 			@RequestParam(value="frame",required=false) String frame,
 			@RequestParam(value="memory",required=false) String memory,
@@ -42,13 +43,14 @@ public class AppDeploymentController {
 			@RequestParam(value="instanceNum",required=false) String instanceNum,
 			@RequestParam(value="serviceInstances",required=false) String[] serviceInstances,
 			@RequestParam(value="subdomain",required=false) String subdomain,
-			@RequestParam(value="filename",required=false) String filenames,
-			@RequestParam("file")   MultipartFile file,
+			@RequestParam("file") MultipartFile file,
 			HttpServletRequest request,
-			HttpServletResponse response)throws Exception{
+			HttpServletResponse response
+			)throws Exception{
 		
 		boolean success = true;
 		String errMsg= "";
+		
 		try {
 			
 			CloudFoundryClient client = (CloudFoundryClient) request.getSession().getAttribute("client");
@@ -70,13 +72,12 @@ public class AppDeploymentController {
 			
 			staging = new Staging(null, frame);
 			
-			String realN = request.getParameter("filename");
 			List<String> uris = new ArrayList<String>();
 			
 			MultipartHttpServletRequest r = (MultipartHttpServletRequest) request;
 			file = r.getFile("file");
-			String realPath = UploadFileUtil.getRealPath(file,request,realN);
-			
+			String realPath = UploadFileUtil.getRealPath(file,request);
+
 			if (StringUtils.isNotBlank(appname) && client != null){
 				uris.add(appname + "." +subdomain);
 				try {
@@ -85,7 +86,7 @@ public class AppDeploymentController {
 					} else {
 						client.createApplication(appname, staging, Integer.parseInt(disk), Integer.parseInt(memory), uris, null);
 					}					
-					client.getApplication(appname).setInstances(Integer.parseInt(instanceNum));					
+					client.getApplication(appname).setInstances(Integer.parseInt(instanceNum));
 					client.uploadApplication(appname, new File(realPath), new UploadStatusCallback() {
 						
 						@Override
