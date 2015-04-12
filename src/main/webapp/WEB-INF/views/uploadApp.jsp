@@ -391,6 +391,24 @@
 														</div>
 													</div>
 													<!-- serviceInstance select -->
+													
+													<!-- staging environment variable key and values -->
+													<div class="control-group">
+														<label class="control-label">编译环境变量(可选)：</label>
+														<div class="controls">
+															<input type="text" id="stagingEnvKey" name="stagingEnvKey" placeholder="环境变量键"/>
+															<span class="add-on"> : </span>
+															<input type="text" id="stagingEnvValue" name="stagingEnvValue" placeholder="环境变量值"/>
+														</div>											
+													</div>
+													
+													<!-- command option -->
+													<div class="control-group">
+														<label class="control-label">应用启动命令(可选)：</label>
+														<div class="controls">
+															<input type="text" id="command" name="command" placeholder="填写应用的启动命令"/>
+														</div>											
+													</div>
 
 													<div class="control-group">
 														<label class="control-label" for="filename">请打包文件：</label>
